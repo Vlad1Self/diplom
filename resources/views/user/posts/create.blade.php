@@ -14,10 +14,6 @@
         </x-slot>
     </x-title>
 
-    <x-post.form action="{{route('user.posts.store')}}" method="post"/>
+    <x-post.form action="{{route('user.posts.store')}}" method="POST" enctype="multipart/form-data"/>
 
 @endsection
-
-
-
-

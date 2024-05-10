@@ -3,22 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 class PostController extends Controller
 {
     public function index()
     {
-        $post = (object)[
-            'id' => 123,
-            'title' => 'Lorem ipsum dolor sit amet.',
-            'content' => 'Lorem ipsum <strong> dolor </strong> sit amet, consectetur adipisicing elit. Nemo, qui.',
-        ];
-
-        $posts = array_fill(0, 10, $post);
+        $posts = Post::all();
 
         return view('user.posts.index', compact('posts'));
     }
-
     public function create()
     {
         return view('user.posts.create');
@@ -26,36 +22,37 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = validate($request->all(), [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
+            'avatar' => ['required'],
         ]);
+        $post = new Post;
+        $post->title = $validated['title'];
+        $post->content = $validated['content'];
+        $post->avatar = $validated['avatar'];
 
+        $avatar = Storage::disk('public')->put('avatars/images', $validated->file('avatar'));
+        $post->avatar = $avatar;
 
+        $post->save();
 
-        return redirect()->route('user.posts.show', 123);
+        return redirect()->route('user.posts.show', $post->id);
     }
 
-    public function show($post)
+    public function show($id)
     {
+        // Получите запись из базы данных по ее идентификатору
+        $post = Post::findOrFail($id);
 
-        $post = (object)[
-            'id' => 123,
-            'title' => 'Lorem ipsum dolor sit amet.',
-            'content' => 'Lorem ipsum <strong> dolor </strong> sit amet, consectetur adipisicing elit. Nemo, qui.',
-        ];
-
+        // Передайте запись во view
         return view('user.posts.show', compact('post'));
     }
 
+
     public function edit($post)
     {
-        $post = (object)[
-            'id' => 123,
-            'title' => 'Lorem ipsum dolor sit amet.',
-            'content' => 'Lorem ipsum <strong> dolor </strong> sit amet, consectetur adipisicing elit. Nemo, qui.',
-        ];
+        $post = Post::findOrFail($post);
 
         return view('user.posts.edit', compact('post'));
     }
@@ -65,8 +62,8 @@ class PostController extends Controller
         $validated = validate($request->all(), [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
+            'avatar' => ['required'],
         ]);
-
 
         return redirect()->route('user.posts.show', $post);
     }

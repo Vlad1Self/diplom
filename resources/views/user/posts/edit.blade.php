@@ -7,7 +7,7 @@
     <x-title>
         {{__('Изменить товар')}}
         <x-slot name="link">
-            <a href="{{route('user.posts.show', $post->id)}}">
+            <a href="{{route('shop.show', $post->id)}}">
                 {{__('Назад')}}
             </a>
         </x-slot>

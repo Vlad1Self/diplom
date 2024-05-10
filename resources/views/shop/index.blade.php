@@ -4,6 +4,12 @@
 
     <x-title>
         {{__('Список товаров')}}
+
+        <x-slot name="right">
+            <x-button-link href="{{route('user.posts.create')}}">
+                {{__('Создать')}}
+            </x-button-link>
+        </x-slot>
     </x-title>
 
  @include ('shop.filter')

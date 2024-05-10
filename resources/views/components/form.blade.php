@@ -14,5 +14,10 @@
             @csrf
         @endif
 
+        <x-form.item>
+            <x-form.input type="file" name="image"/>
+        </x-form.item>
+
     {{$slot}}
+
 </form>

@@ -12,10 +12,10 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-       /* $validated = $request -> validate([
+       $validated = $request -> validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
-        ]);*/
+        ]);
 
         session(['alert' => __('Добро пожаловать!')] );
 
