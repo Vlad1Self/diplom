@@ -22,22 +22,24 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $validated = validate($request->all(), [
+        $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'avatar' => ['required'],
+            'avatar' => ['required', 'image', 'max:2048'],
         ]);
+
         $post = new Post;
         $post->title = $validated['title'];
         $post->content = $validated['content'];
-        $post->avatar = $validated['avatar'];
 
-        $avatar = Storage::disk('public')->put('avatars/images', $validated->file('avatar'));
-        $post->avatar = $avatar;
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/avatars');
+            $post->avatar = basename($path);
+        }
 
         $post->save();
 
-        return redirect()->route('user.posts.show', $post->id);
+        return redirect()->route('shop');
     }
 
     public function show($id)

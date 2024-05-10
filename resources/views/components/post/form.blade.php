@@ -14,7 +14,9 @@
         <x-error name="content"/>
 
     </x-form-item>
-
+    <x-form.item>
+        <x-form.input type="file" name="image"/>
+    </x-form.item>
     <x-button type="submit">
         {{__('Сохранить')}}
     </x-button>
