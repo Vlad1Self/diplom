@@ -25,22 +25,22 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'avatar' => ['required', 'image', 'max:2048'],
+            'image' => ['required','mimes:jpeg,png,bmp,gif,svg'],
         ]);
 
         $post = new Post;
         $post->title = $validated['title'];
         $post->content = $validated['content'];
 
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('public/avatars');
-            $post->avatar = basename($path);
-        }
+        $image_path = Storage::disk('public')->put('posts/images', $request->image);
+        $post->image_path = $image_path;
 
         $post->save();
 
         return redirect()->route('shop');
     }
+
+
 
     public function show($id)
     {
@@ -59,16 +59,29 @@ class PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update(Request $request, $post)
+    public function update(Request $request, $id)
     {
-        $validated = validate($request->all(), [
+        $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'avatar' => ['required'],
+            'avatar' => ['sometimes', 'file', 'mimes:jpeg,jpg,png,gif'],
         ]);
+
+        $post = Post::findOrFail($id);
+
+        $post->title = $validated['title'];
+        $post->content = $validated['content'];
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/avatars');
+            $post->avatar = basename($path);
+        }
+
+        $post->save();
 
         return redirect()->route('user.posts.show', $post);
     }
+
 
     public function delete($post)
     {

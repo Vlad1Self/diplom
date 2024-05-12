@@ -16,9 +16,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('title');
+            $table->decimal('price');
             $table->text('content');
-            $table->string('avatar');
-
+            $table->string('image_path');
+            /*$table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();*/
         });
     }
 

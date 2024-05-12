@@ -8,7 +8,7 @@
         {{__('Просмотр товара')}}
 
         <x-slot name="link">
-            <a href="{{route('user.posts')}}">
+            <a href="{{route('shop')}}">
                 {{__('Назад')}}
             </a>
         </x-slot>
@@ -33,6 +33,7 @@
     </h2>
 
     <div class="pt-3">
+        <img src="{{ asset("storage/$post->image_path") }}" class="img-fluid" alt="">
         {!! $post->content !!}
     </div>
 

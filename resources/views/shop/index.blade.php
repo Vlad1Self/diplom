@@ -14,7 +14,6 @@
 
  @include ('shop.filter')
 
-
     @if(empty($posts))
         {{__('Нет ни одного товара')}}
      @else
