@@ -35,10 +35,3 @@ Route::middleware('guest')->group(function () {
 
 Route::get('shop', [ShopController::class, 'index'])->name('shop');
 Route::get('shop/{post}', [ShopController::class, 'show'])->name('shop.show');
-
-Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-Route::get('/basket/order', [BasketController::class, 'checkout'])->name('basket.checkout');
-
-Route::post('/basket/add/{id}', [BasketController::class, 'add'])
-    ->where('id', '[0-9]+')
-    ->name('basket.add');
