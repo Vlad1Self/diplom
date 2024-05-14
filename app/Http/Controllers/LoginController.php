@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     public function index()
@@ -12,13 +14,17 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-       $validated = $request -> validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+        $validated = $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255'],
         ]);
 
-        session(['alert' => __('Добро пожаловать!')] );
-
-        return redirect()->route('shop');
+        if (Auth::attempt($validated)) {
+            session(['alert' => __('Добро пожаловать!')]);
+            return redirect()->route('shop');
+        } else {
+            session(['alert' => __('Неверный email или пароль')]);
+            return redirect()->route('login');
+        }
     }
 }

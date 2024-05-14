@@ -34,8 +34,7 @@ class ShopController extends Controller
     public function create()
     {
         $categories = Category::all();
-
-        return view('user.posts.create', compact('categories'));
+        return view('user.posts.create', ['categories' => $categories]);
     }
     public function store(Request $request)
     {
@@ -51,7 +50,7 @@ class ShopController extends Controller
         $post->title = $validated['title'];
         $post->content = $validated['content'];
         $post->price = $validated['price'];
-        $post->category_id = $validated['category_id'];
+        $post->category_id = Category::query()->value('id');
 
         $image_path = Storage::disk('public')->put('posts/images', $request->image);
         $post->image_path = $image_path;
@@ -85,7 +84,7 @@ class ShopController extends Controller
             'content' => ['required', 'string'],
             'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif'],
             'price' => ['required', 'numeric'],
-            'category_id' => ['required', 'numeric'],
+            'category_id' => ['required', 'array', 'exists:categories,id'],
         ]);
 
         $post = Post::findOrFail($id);
@@ -93,6 +92,7 @@ class ShopController extends Controller
         $post->title = $validated['title'];
         $post->content = $validated['content'];
         $post->price = $validated['price'];
+        $post->category_id = Category::query()->value('id');
 
         Storage::delete($post->image_path);
         $image_path = Storage::disk('public')->put('books/images', $request->image);

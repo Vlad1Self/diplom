@@ -7,6 +7,9 @@
         </h2>
 
         <p>
+            {{ $post -> price }} руб.
+        </p>
+        <p>
             {!!$post->content!!}
         </p>
     </x-card-body>
