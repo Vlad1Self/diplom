@@ -7,10 +7,11 @@
         </h2>
         <img src="{{ asset("storage/$post->image_path") }}" class="img-fluid" alt="">
         <p>
-            {{ $post -> price }} руб.
+            <strong>{{ $post -> price }} ₽</strong>
         </p>
         <p>
             {!!$post->content!!}
         </p>
+        <p class="btn-holder"><a href="{{ route('addbook.to.cart', $post->id) }}" class="btn btn-outline-danger">Добавить в корзину</a> </p>
     </x-card-body>
 </x-card>

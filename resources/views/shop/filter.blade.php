@@ -9,8 +9,9 @@
         <div class="col-12 col-md-3">
             <div class="mb-3">
                 <x-form.select name="category_id">
+                    <option value="">{{__('Все категории')}}</option>
                     @foreach($categories as $category)
-                        <option @if(in_array($category->id, old('category_id', []))) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option @if(request('category_id') == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </x-form.select>
             </div>

@@ -11,13 +11,21 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+            'category_id' => 'nullable|exists:categories,id',
+        ]);
+
         $search = $request->input('search');
         $category_id = $request->input('category_id');
 
         $posts = Post::query();
 
         if ($search) {
-            $posts->where('title', 'like', "%{$search}%");
+            $searchTerm = strtolower($search);
+            $posts->where(function ($query) use ($searchTerm) {
+                $query->whereRaw("LOWER(title) like ?", ["%{$searchTerm}%"]);
+            });
         }
 
         if ($category_id) {

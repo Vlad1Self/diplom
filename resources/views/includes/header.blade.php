@@ -24,6 +24,13 @@
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Корзина <span class="badge text-bg-danger">{{ count((array) session('cart')) }}</span>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('register') }}" class="nav-link {{ active_link('register*') }}" aria-current="page">
                         {{ __('Регистрация') }}

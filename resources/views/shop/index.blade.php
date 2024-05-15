@@ -12,7 +12,7 @@
         </x-slot>
     </x-title>
 
- @include ('shop.filter')
+@include ('shop.filter')
 
     @if(empty($posts))
         {{__('Нет ни одного товара')}}

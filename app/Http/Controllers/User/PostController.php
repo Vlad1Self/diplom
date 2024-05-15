@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Lenius\Basket\Item;
+use Lenius\LaravelEcommerce\Facades\Cart;
 
 class PostController extends Controller
 {
@@ -51,7 +53,8 @@ class PostController extends Controller
         $post->title = $validated['title'];
         $post->content = strip_tags($validated['content']);
         $post->price = $validated['price'];
-        $post->category_id = $request->category_id[0];
+        $post->category_id = $validated['category_id'][0];
+
 
         $image_path = Storage::disk('public')->put('posts/images', $request->image);
         $post->image_path = $image_path;
@@ -74,7 +77,6 @@ class PostController extends Controller
         $categories = Category::all();
         return view('user.posts.edit', compact('post', 'categories'));
     }
-
 
     public function update(Request $request, Post $post)
     {
