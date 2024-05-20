@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -42,3 +43,5 @@ Route::get('/shopping-cart', [CartController::class, 'bookCart'])->name('shoppin
 Route::get('/book/{id}', [CartController::class, 'addBooktoCart'])->name('addbook.to.cart');
 Route::patch('/update-shopping-cart', [CartController::class, 'updateCart'])->name('update.shopping.cart');
 Route::delete('/delete-cart-product', [CartController::class, 'deleteProduct'])->name('delete.cart.product');
+
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
