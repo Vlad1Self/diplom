@@ -32,7 +32,7 @@ class CartController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Товар был успешно добавлен в корзину!');
+        return redirect()->back();
     }
 
     public function updateCart(Request $request)
@@ -53,7 +53,6 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Товар был успешно удален из корзины!');
         }
     }
 }

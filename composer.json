@@ -11,7 +11,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
-        "lenius/laravel-ecommerce": "^2.0"
+        "lenius/laravel-ecommerce": "^2.0",
+        "stripe/stripe-php": "^14.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",

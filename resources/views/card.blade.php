@@ -58,8 +58,9 @@
         <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ url('shop') }}" class="btn btn-primary"></i>Вернуться обратно</a>
-                <a href="{{ url('checkout') }}" class="btn btn-danger"></i>Оплатить</a>
+                <a href="{{ url('shop') }}" class="btn btn-primary"></i>Назад</a>
+
+                <a href="{{ url('payment') }}" class="btn btn-danger"></i>Оформить заказ</a>
                 {{--<button class="btn btn-danger">Оплатить</button>--}}
             </td>
             <th style="width: 10%; height: 50px;"></th>
