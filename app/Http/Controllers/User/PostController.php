@@ -46,20 +46,27 @@ class PostController extends Controller
             'content' => ['required', 'string'],
             'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif'],
             'price' => ['required', 'numeric'],
-            'category_id' => ['required', 'array', 'exists:categories,id'],
+            'categories_id' => ['required', 'array', 'exists:categories,id'],
         ]);
 
         $post = new Post;
         $post->title = $validated['title'];
         $post->content = strip_tags($validated['content']);
         $post->price = $validated['price'];
-        $post->category_id = $validated['category_id'][0];
+        $post->category_id = $validated['categories_id'][0];
+
 
 
         $image_path = Storage::disk('public')->put('posts/images', $request->image);
         $post->image_path = $image_path;
 
-        $post->save();
+        /*$post->categories()->sync($request->categories_id);
+        $post->save();*/
+
+        if ($post->save()) {
+            $post->categories()->sync($validated['categories_id']);
+        }
+
 
         return redirect()->route('shop');
     }

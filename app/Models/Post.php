@@ -18,13 +18,8 @@ class Post extends Model
         'image_path',
     ];
     // In Post.php
-    public function category(): BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
-
-    public function baskets() {
-        return $this->belongsToMany(Basket::class)->withPivot('quantity');
-    }
-
 }

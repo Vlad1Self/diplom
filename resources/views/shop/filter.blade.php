@@ -8,10 +8,9 @@
 
         <div class="col-12 col-md-3">
             <div class="mb-3">
-                <x-form.select name="category_id">
-                    <option value="">{{__('Все категории')}}</option>
+                <x-form.select name="categories_id[]" multiple>
                     @foreach($categories as $category)
-                        <option @if(request('category_id') == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option @if(in_array($category->id, old('categories_id', []))) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </x-form.select>
             </div>
