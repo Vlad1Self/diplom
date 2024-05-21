@@ -17,7 +17,7 @@ class Post extends Model
         'price',
         'image_path',
     ];
-    // In Post.php
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);

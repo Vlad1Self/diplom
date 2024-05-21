@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $category_id = $request->input('category_id');
+        $categories_id = $request->input('categories_id');
 
         $posts = Post::query();
 
@@ -23,16 +23,22 @@ class PostController extends Controller
             $posts->where('title', 'like', "%{$search}%");
         }
 
-        if ($category_id) {
-            $posts->where('category_id', $category_id);
+        if ($categories_id) {
+            $posts->whereHas('categories', function ($query) use ($categories_id) {
+                $query->where('id', $categories_id);
+            });
         }
+
 
         $posts = $posts->get();
 
         $categories = Category::all();
 
-        return view('shop.index', compact('posts', 'categories'));
+        return view('shop', compact('posts', 'categories'));
+
+
     }
+
 
     public function create()
     {
@@ -92,7 +98,7 @@ class PostController extends Controller
             'content' => ['nullable', 'string'],
             'image' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
             'price' => ['nullable', 'numeric'],
-            'category_id' => ['nullable', 'array', 'exists:categories,id'],
+            'categories_id' => ['required', 'array', 'exists:categories,id'],
         ]);
 
         $post->title = $validated['title'];
@@ -105,6 +111,10 @@ class PostController extends Controller
             $post->image_path = $image_path;
         }
 
+        if ($post->save()) {
+            $post->categories()->sync($validated['categories_id']);
+        }
+
         $post->save();
 
         return redirect()->route('shop');
@@ -115,6 +125,6 @@ class PostController extends Controller
         $post = Post::query()->findOrFail($id);
         Storage::delete($post->image_path);
         $post->delete();
-        return redirect()->route('user.posts', $post);
+        return redirect()->route('shop', $post);
     }
 }

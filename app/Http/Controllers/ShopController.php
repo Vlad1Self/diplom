@@ -11,25 +11,19 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $request->validate([
-            'search' => 'nullable|string|max:255',
-            'category_id' => 'nullable|exists:categories,id',
-        ]);
-
         $search = $request->input('search');
-        $category_id = $request->input('category_id');
+        $categories_id = $request->input('categories_id');
 
         $posts = Post::query();
 
         if ($search) {
-            $searchTerm = strtolower($search);
-            $posts->where(function ($query) use ($searchTerm) {
-                $query->whereRaw("LOWER(title) like ?", ["%{$searchTerm}%"]);
-            });
+            $posts->where('title', 'like', "%{$search}%");
         }
 
-        if ($category_id) {
-            $posts->where('category_id', $category_id);
+        if ($categories_id) {
+            $posts->whereHas('categories', function ($query) use ($categories_id) {
+                $query->where('categories.id', $categories_id);
+            });
         }
 
         $posts = $posts->get();
@@ -37,7 +31,10 @@ class ShopController extends Controller
         $categories = Category::all();
 
         return view('shop.index', compact('posts', 'categories'));
+
+
     }
+
 
     public function create()
     {
@@ -51,64 +48,72 @@ class ShopController extends Controller
             'content' => ['required', 'string'],
             'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif'],
             'price' => ['required', 'numeric'],
-            'category_id' => ['required', 'array', 'exists:categories,id'],
+            'categories_id' => ['required', 'array', 'exists:categories,id'],
         ]);
 
         $post = new Post;
         $post->title = $validated['title'];
-        $post->content = $validated['content'];
+        $post->content = strip_tags($validated['content']);
         $post->price = $validated['price'];
-        $post->category_id = Category::query()->value('id');
+        $post->category_id = $validated['categories_id'][0];
+
+
 
         $image_path = Storage::disk('public')->put('posts/images', $request->image);
         $post->image_path = $image_path;
 
-        $post->save();
+        /*$post->categories()->sync($request->categories_id);
+        $post->save();*/
+
+        if ($post->save()) {
+            $post->categories()->sync($validated['categories_id']);
+        }
+
 
         return redirect()->route('shop');
     }
 
     public function show($id)
     {
-        // Получите запись из базы данных по ее идентификатору
         $post = Post::findOrFail($id);
 
-        // Передайте запись во view
         return view('user.posts.show', compact('post'));
     }
 
 
-    public function edit($post)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($post);
-
-        return view('user.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('user.posts.edit', compact('post', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string'],
-            'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif'],
-            'price' => ['required', 'numeric'],
-            'category_id' => ['required', 'array', 'exists:categories,id'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'content' => ['nullable', 'string'],
+            'image' => ['nullable', 'file', 'mimes:jpeg,jpg,png,gif'],
+            'price' => ['nullable', 'numeric'],
+            'categories_id' => ['required', 'array', 'exists:categories,id'],
         ]);
 
-        $post = Post::findOrFail($id);
-
         $post->title = $validated['title'];
-        $post->content = $validated['content'];
+        $post->content = strip_tags($validated['content']);
         $post->price = $validated['price'];
         $post->category_id = Category::query()->value('id');
 
-        Storage::delete($post->image_path);
-        $image_path = Storage::disk('public')->put('books/images', $request->image);
-        $post->image_path = $image_path;
+        if ($request->hasFile('image')) {
+            $image_path = Storage::disk('public')->put('posts/images', $request->image);
+            $post->image_path = $image_path;
+        }
+
+        if ($post->save()) {
+            $post->categories()->sync($validated['categories_id']);
+        }
 
         $post->save();
 
-        return redirect()->route('user.posts.show', $post);
+        return redirect()->route('shop');
     }
 
     public function delete(Request $request, $id)
@@ -116,6 +121,6 @@ class ShopController extends Controller
         $post = Post::query()->findOrFail($id);
         Storage::delete($post->image_path);
         $post->delete();
-        return redirect()->route('user.posts', $post);
+        return redirect()->route('shop', $post);
     }
 }
