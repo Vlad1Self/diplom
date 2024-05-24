@@ -6,9 +6,20 @@ class Cart extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'content',
+        'quantity',
         'price',
-        'image_path',
+        'order_id',
+        'post_id',
     ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
 }

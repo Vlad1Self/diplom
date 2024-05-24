@@ -60,7 +60,8 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-block">Оформить заказ и оплатить</button>
+                    <button type="submit" class="btn btn-danger btn-block">Оплата по карте</button>
+
                 </form>
             </div>
         </div>

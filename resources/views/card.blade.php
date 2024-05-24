@@ -4,6 +4,9 @@
 
 
 @section('content')
+    @if(empty(session('cart')))
+        {{__('Нет ни одного товара')}}
+    @else
     <table id="cart" class="table table-bordered" style="table-layout: fixed;">
         <thead>
         <tr>
@@ -18,6 +21,7 @@
 
         <tbody>
         @php $total = 0 @endphp
+
         @if(session('cart'))
 
             @foreach(session('cart') as $id => $details)
@@ -74,6 +78,8 @@
 
         </tfoot>
     </table>
+
+    @endif
 @endsection
 
 @section('scripts')

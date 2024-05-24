@@ -28,12 +28,16 @@ class CartController extends Controller
                 "content" => $book->content,
                 "quantity" => 1,
                 "price" => $book->price,
-                "image_path" => $book->image_path
+                "image_path" => $book->image_path,
+                "post_id" => $book->id,
             ];
         }
         session()->put('cart', $cart);
         return redirect()->back();
     }
+
+
+
 
     public function updateCart(Request $request)
     {

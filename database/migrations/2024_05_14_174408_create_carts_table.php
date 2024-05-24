@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('quantity')->default(1);
+            $table->integer('quantity');
+            $table->decimal('price', 8, 2);
 
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('post_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }

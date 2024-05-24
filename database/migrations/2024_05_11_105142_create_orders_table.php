@@ -15,8 +15,15 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->string('address');
+            $table->string('entrance')->nullable();
+            $table->string('floor')->nullable();
+            $table->string('apartment')->nullable();
+            $table->string('comment')->nullable();
+
+            $table->decimal('total_price');
+
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('total_price');
 
         });
     }

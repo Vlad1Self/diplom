@@ -2,7 +2,6 @@
 
 
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -46,6 +45,7 @@ Route::patch('/update-shopping-cart', [CartController::class, 'updateCart'])->na
 Route::delete('/delete-cart-product', [CartController::class, 'deleteProduct'])->name('delete.cart.product');
 
 Route::get('/payment', [StripeController::class, 'index'])->name('index');
+Route::post('/payment', [StripeController::class, 'store'])->name('payment.store');
 Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
 Route::get('success', [StripeController::class, 'success'])->name('success');
 

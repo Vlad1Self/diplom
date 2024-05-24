@@ -23,7 +23,7 @@ class LoginController extends Controller
             session(['alert' => __('Добро пожаловать!')]);
             return redirect()->route('shop');
         } else {
-            session(['alert' => __('Неверный email или пароль')]);
+            session(['alert' => __('Неверный логин или пароль')]);
             return redirect()->route('login');
         }
     }
