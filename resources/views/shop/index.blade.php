@@ -6,9 +6,11 @@
         {{__('Список товаров')}}
 
         <x-slot name="right">
-            <x-button-link href="{{route('user.posts.create')}}">
-                {{__('Создать')}}
-            </x-button-link>
+            @can('viewAny', App\Models\User::class)
+                <x-button-link href="{{route('user.posts.create')}}">
+                    {{__('Создать')}}
+                </x-button-link>
+            @endcan
         </x-slot>
     </x-title>
 
@@ -26,7 +28,8 @@
                     <x-form.select name="categories_id">
                         <option value="">{{__('Все категории')}}</option>
                         @foreach($categories as $category)
-                            <option @if(in_array($category->id, old('categories_id', []))) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option @if(in_array($category->id, old('categories_id', []))) selected
+                                    @endif value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </x-form.select>
                 </div>
@@ -44,7 +47,7 @@
 
     @if(empty($posts))
         {{__('Нет ни одного товара')}}
-     @else
+    @else
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-12 col-md-3">

@@ -14,6 +14,7 @@
         </x-slot>
 
         <x-slot name="right">
+            @can('viewAny', App\Models\User::class)
             <div class="d-flex justify-content-between align-items-center">
                 <x-button-link href="{{route('user.posts.edit', $post->id)}}">
                     {{__('Изменить')}}
@@ -25,6 +26,7 @@
                     <x-button type="submit" class="mx-2">{{__('Удалить')}}</x-button>
                 </form>
             </div>
+            @endcan
         </x-slot>
     </x-title>
 
