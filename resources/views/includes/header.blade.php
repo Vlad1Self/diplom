@@ -31,17 +31,32 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('register') }}" class="nav-link {{ active_link('register*') }}" aria-current="page">
-                        {{ __('Регистрация') }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Это пример иконки из Font Awesome -->
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item {{ active_link('register*') }}" href="{{ route('register') }}">
+                            {{ __('Регистрация') }}
+                        </a>
+                        <a class="dropdown-item {{ active_link('login*')}}" href="{{ route('login') }}">
+                            {{ __('Вход') }}
+                        </a>
+                        @auth
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">
+                            {{ __('Выйти') }}
+                        </a>
+                        @endauth
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+
+                    </div>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link {{ active_link('login*')}}" aria-current="page">
-                        {{ __('Вход') }}
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
