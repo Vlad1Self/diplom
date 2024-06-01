@@ -12,7 +12,7 @@
 
                     <div class="form-group mb-2">
                         <label for="current_password">Текущий пароль</label>
-                        <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" required>
+                        <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" required autofocus>
                         @error('current_password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

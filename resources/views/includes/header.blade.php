@@ -51,7 +51,7 @@
                             {{ __('Выйти') }}
                         </a>
 
-                        <a class="dropdown-item" href="{{ route('password-change') }}">
+                        <a class="dropdown-item" href="{{ route('password-reset') }}">
                             {{ __('Изменить пароль') }}
                          </a>
                         @endguest

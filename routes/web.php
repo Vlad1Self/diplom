@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/password-change', [PasswordController::class, 'showChangePasswordForm'])->name('password-change');
 Route::match(['POST', 'PUT'], '/password-change', [PasswordController::class, 'changePassword'] )->name('password-update');
 
+Route::get('/password-reset', [PasswordController::class, 'PasswordReset'])->name('password-reset');
+Route::post('/password-reset', [PasswordController::class, 'PasswordResetUpdate'])->name('password-reset.update');
 
 
 Route::get('shop', [ShopController::class, 'index'])->name('shop');
