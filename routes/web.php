@@ -41,12 +41,17 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 });
 
+/*Изменение только пароля*/
 Route::get('/password-change', [PasswordController::class, 'showChangePasswordForm'])->name('password-change');
-Route::match(['POST', 'PUT'], '/password-change', [PasswordController::class, 'changePassword'] )->name('password-update');
-
+Route::post('/password-change', [PasswordController::class, 'changePassword'] )->name('password-update');
 Route::get('/password-reset', [PasswordController::class, 'PasswordReset'])->name('password-reset');
 Route::post('/password-reset', [PasswordController::class, 'PasswordResetUpdate'])->name('password-reset.update');
 
+/*Сброс пароля через почту*/
+Route::get('/password/email', [PasswordController::class, 'showPasswordResetForm'])->name('password-request');
+Route::post('/password/email', [PasswordController::class, 'sendPasswordResetEmail'])->name('password-email');
+Route::get('/password/email/reset/{token}', [PasswordController::class, 'showPasswordResetFormReset'])->name('password-request-reset');
+Route::post('/password/email/reset/{token}', [PasswordController::class, 'sendPasswordResetEmailReset'])->name('password-email-reset');
 
 Route::get('shop', [ShopController::class, 'index'])->name('shop');
 Route::get('shop/{post}', [ShopController::class, 'show'])->name('shop.show');

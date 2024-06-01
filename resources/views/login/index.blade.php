@@ -13,7 +13,7 @@
                     <h1 class="text-center mb-4">Вход</h1>
 
                     <div class="form-group mb-2">
-                        <label for="email">Логин</label>
+                        <label for="email">Email</label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -38,6 +38,11 @@
                         </x-checkbox>
                         <x-error name="remember"/>
                     </x-form-item>
+
+                    <div class="text-left mt-3">
+                        <a href="{{ route('password-email') }}">Забыли пароль?</a>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary btn-block">Вход</button>
 

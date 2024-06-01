@@ -35,8 +35,9 @@ class PasswordNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Смена пароля')
-            ->greeting('Здравствуйте!')
+
+            ->subject('Изменить пароль')
+            ->greeting('Здравствуйте! ')
             ->line('Вы отправили заявку на смену пароля. Пожалуйста, перейдите по ссылке ниже: ')
             ->action('Изменить пароль', url('/password-change'))
             ->line('Если вы не отправляли заявку на смену пароля, проигнорируйте это письмо.');

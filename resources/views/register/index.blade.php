@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label for="email">Логин</label>
+                        <label for="email">Email</label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required minlength="8">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
