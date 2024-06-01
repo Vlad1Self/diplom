@@ -1,55 +1,69 @@
-@extends('layouts.auth')
+@extends('layouts.main')
 
 @section('page.title', 'Регистрация')
 
-@section('auth.content')
-    <x-card>
-        <x-card-header>
-            <x-card-title>
-                {{__('Регистрация')}}
-            </x-card-title>
-        </x-card-header>
+@section('content')
 
-        <x-card-body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-4">
+                <form action="{{ route('register.store') }}" method="POST" class="p-5 border rounded shadow bg-white">
+                    @csrf
 
+                    <h1 class="text-center mb-4">Регистрация</h1>
 
-            <x-form action="{{route('register.store')}}" method="POST">
-                <x-form-item>
-                    <x-label required>{{__('Имя')}}</x-label>
-                    <x-input name="name" autofocus/>
-                    <x-error name="name"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="name">Имя</label>
+                        <input type="name" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-form-item>
-                    <x-label required>{{__('Логин')}}</x-label>
-                    <x-input type="email" name="email"/>
-                    <x-error name="email"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="email">Логин</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required minlength="8">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-form-item>
-                    <x-label required>{{__('Пароль')}}</x-label>
-                    <x-input type="password" name="password"/>
-                    <x-error name="password"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-form-item>
-                    <x-label required>{{__('Подтверждение пароля')}}</x-label>
-                    <x-input type="password" name="password_confirmation"/>
-                    <x-error name="password_confirmation"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="password_confirmation">Подтверждение пароля</label>
+                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required>
+                        @error('password_confirmation')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-form-item>
-                    <x-checkbox name="agreement" :checked="!! old('agreement')">
-                        {{__('Я согласен на обработку пользовательских данных')}}
-                    </x-checkbox>
-                    <x-error name="agreement"/>
-                </x-form-item>
+                    <x-form-item>
+                        <x-checkbox name="agreement" :checked="!! old('remember')">
+                            {{__('Я согласен на обработку пользовательских данных')}}
+                        </x-checkbox>
+                        <x-error name="agreement"/>
+                    </x-form-item>
 
-                <x-button type="submit" class="w-100">
-                    {{__('Вход')}}
-                </x-button>
+                    <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
 
-            </x-form>
-        </x-card-body>
-    </x-card>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection

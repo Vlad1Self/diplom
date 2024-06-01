@@ -11,7 +11,7 @@
                     <h1 class="text-center mb-4">Оформить заказ</h1>
 
                     <div class="form-group mb-2">
-                        <label for="address">Адрес доставки (город, улица, дом)</label>
+                        <label for="address">Адрес доставки (улица, дом)</label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" required>
                         @error('address')
                         <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label for="comment">Комментарий к адресу</label>
+                        <label for="comment">Комментарий к заказу</label>
                         <textarea class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment">{{ old('comment') }}</textarea>
                         @error('comment')
                         <span class="invalid-feedback" role="alert">
@@ -60,7 +60,15 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-block">Оплата по карте</button>
+                    <div class="form-group mb-2">
+                        <label for="payment_method">Способ оплаты</label>
+                        <select class="form-control" id="payment_method" name="payment_method">
+                            <option value="card">Карта</option>
+                            <option value="cash">Наличные</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Оплатить</button>
 
                 </form>
             </div>

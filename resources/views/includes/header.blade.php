@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light">
     <div class="container">
         <a href="{{ route('shop') }}" class="navbar-brand">
             {{ config('app.name') }}
@@ -34,21 +34,27 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Это пример иконки из Font Awesome -->
+                        @auth
+                            {{ Auth::user()->email }}
+                        @endauth
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @guest
                         <a class="dropdown-item {{ active_link('register*') }}" href="{{ route('register') }}">
                             {{ __('Регистрация') }}
                         </a>
                         <a class="dropdown-item {{ active_link('login*')}}" href="{{ route('login') }}">
                             {{ __('Вход') }}
                         </a>
-                        @auth
-                        <div class="dropdown-divider"></div>
-
+                        @else
                         <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">
                             {{ __('Выйти') }}
                         </a>
-                        @endauth
+
+                        <a class="dropdown-item" href="{{ route('password-change') }}">
+                            {{ __('Изменить пароль') }}
+                         </a>
+                        @endguest
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

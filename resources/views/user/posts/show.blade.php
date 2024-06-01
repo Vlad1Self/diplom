@@ -7,12 +7,6 @@
     <x-title>
         {{__('Просмотр товара')}}
 
-        <x-slot name="link">
-            <a href="{{route('shop')}}">
-                {{__('Назад')}}
-            </a>
-        </x-slot>
-
         <x-slot name="right">
             @can('viewAny', App\Models\User::class)
             <div class="d-flex justify-content-between align-items-center">

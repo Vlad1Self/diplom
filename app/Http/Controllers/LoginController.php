@@ -23,8 +23,8 @@ class LoginController extends Controller
             session(['alert' => __('Добро пожаловать!')]);
             return redirect()->route('shop');
         } else {
-            session(['alert' => __('Неверный логин или пароль')]);
-            return redirect()->route('login');
+
+            return redirect()->route('login')->withErrors(['email' => 'Неверный логин или пароль', 'password' => 'Неверный логин или пароль'])->withInput();
         }
     }
 

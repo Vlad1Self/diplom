@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-
     <section>
         <x-container>
             @yield('main.content')

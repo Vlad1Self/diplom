@@ -6,3 +6,94 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.content-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Количество видимых строк */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.card h2.h6 a {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Количество видимых строк */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content-container {
+    height: 60px; /* The height you want the container to be */
+    overflow: hidden;
+}
+
+.card h2.h6 {
+    height: 30px; /* The height you want the container to be */
+    overflow: hidden;
+}
+
+.content {
+    background-color: #F8F9FF; /* Светло-голубой цвет */
+}
+
+.footer {
+    background-color: #F3F5FF; /* Средне-голубой цвет */
+}
+
+.navbar-light {
+    background-color: #F3F5FF; /* Светло-голубой цвет */
+}
+
+.product-card:first-child {
+    background-color: #E9EBF8; /* Светло-голубой цвет */
+    color: #000000; /* Черный цвет текста */
+}
+
+.h6 a {
+    color: black;
+    text-decoration: none;
+}
+
+.h6 a:hover {
+    color: #4285F4; /* Ярко-голубой цвет при наведении */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

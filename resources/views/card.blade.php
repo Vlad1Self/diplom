@@ -1,13 +1,10 @@
 @extends('shop')
 
-@include('includes.header')
-
-
 @section('content')
     @if(empty(session('cart')))
         {{__('Нет ни одного товара')}}
     @else
-    <table id="cart" class="table table-bordered" style="table-layout: fixed;">
+    <table id="cart" class="table table-bordered " style="table-layout: fixed;">
         <thead>
         <tr>
             <th style="width: 20%; height: 50px;">Название</th>
@@ -62,9 +59,9 @@
         <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ url('shop') }}" class="btn btn-primary"></i>Назад</a>
+               {{-- <a href="{{ url('shop') }}" class="btn btn-primary"></i>Назад</a>--}}
 
-                <a href="{{ url('payment') }}" class="btn btn-danger"></i>Оформить заказ</a>
+                <a href="{{ url('payment') }}" class="btn btn-primary"></i>Оформить заказ</a>
                 {{--<button class="btn btn-danger">Оплатить</button>--}}
             </td>
             <th style="width: 10%; height: 50px;"></th>
@@ -124,5 +121,5 @@
         });
 
     </script>
-    @include('includes.footer')
+
 @endsection

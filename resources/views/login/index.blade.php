@@ -1,42 +1,51 @@
-@extends('layouts.auth')
+@extends('layouts.main')
 
 @section('page.title', 'Вход')
 
-@section('auth.content')
-    <x-card>
-        <x-card-header>
-            <x-card-title>
-                {{__('Вход')}}
-            </x-card-title>
-        </x-card-header>
+@section('content')
 
-        <x-card-body>
-            <x-form action="{{route('login.store')}}" method="POST">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-4">
+                <form action="{{ route('login.store') }}" method="POST" class="p-5 border rounded shadow bg-white">
+                    @csrf
 
-                <x-form-item>
-                    <x-label required>{{__('Логин')}}</x-label>
-                    <x-input type="email" name="email" autofocus/>
-                    <x-error name="email"/>
-                </x-form-item>
+                    <h1 class="text-center mb-4">Вход</h1>
 
-                <x-form-item>
-                    <x-label required>{{__('Пароль')}}</x-label>
-                    <x-input type="password" name="password"/>
-                    <x-error name="password"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="email">Логин</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-form-item>
-                    <x-checkbox name="remember" :checked="!! old('remember')">
-                        {{__('Запомнить меня')}}
-                    </x-checkbox>
-                    <x-error name="remember"/>
-                </x-form-item>
+                    <div class="form-group mb-2">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required minlength="8">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                <x-button type="submit" class="w-100">
-                    {{__('Вход')}}
-                </x-button>
+                    <x-form-item>
+                        <x-checkbox name="remember" :checked="!! old('remember')">
+                            {{__('Запомнить меня')}}
+                        </x-checkbox>
+                        <x-error name="remember"/>
+                    </x-form-item>
 
-            </x-form>
-        </x-card-body>
-    </x-card>
+                    <button type="submit" class="btn btn-primary btn-block">Вход</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
+
+

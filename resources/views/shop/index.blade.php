@@ -18,14 +18,14 @@
         <div class="row">
             <div class="col-12 col-md-3">
                 <div class="mb-3">
-                    <x-input name="search" value="{{ request('search') }}" placeholder="{{__('Поиск')}}"/>
+                    <x-input name="search" value="{{ request('search') }}" placeholder="{{__('Поиск')}}" style="height: 40px; font-size: 15px;"/>
                 </div>
             </div>
 
 
             <div class="col-12 col-md-3">
                 <div class="mb-3">
-                    <x-form.select name="categories_id">
+                    <x-form.select name="categories_id" style="height: 40px; font-size: 15px;">
                         <option value="">{{__('Все категории')}}</option>
                         @foreach($categories as $category)
                             <option @if(in_array($category->id, old('categories_id', []))) selected
@@ -38,7 +38,7 @@
             <div class="col-12 col-md-3">
                 <div class="mb-3">
                     <x-button type="submit">
-                        {{__('Применить')}}
+                        {{__('Найти')}}
                     </x-button>
                 </div>
             </div>

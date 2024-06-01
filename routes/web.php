@@ -4,6 +4,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StripeController;
@@ -39,6 +40,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 });
+
+Route::get('/password-change', [PasswordController::class, 'showChangePasswordForm'])->name('password-change');
+Route::match(['POST', 'PUT'], '/password-change', [PasswordController::class, 'changePassword'] )->name('password-update');
+
+
 
 Route::get('shop', [ShopController::class, 'index'])->name('shop');
 Route::get('shop/{post}', [ShopController::class, 'show'])->name('shop.show');
