@@ -35,7 +35,7 @@
 }
 
 .content {
-    background-color: #F8F9FF; /* Светло-голубой цвет */
+    background-color: white; /* Светло-голубой цвет */
 }
 
 .footer {
@@ -47,7 +47,7 @@
 }
 
 .product-card:first-child {
-    background-color: #E9EBF8; /* Светло-голубой цвет */
+    background-color: white; /* Светло-голубой цвет */
     color: #000000; /* Черный цвет текста */
 }
 
@@ -59,6 +59,17 @@
 .h6 a:hover {
     color: #4285F4; /* Ярко-голубой цвет при наведении */
 }
+
+.forgot-password-link {
+    color: #007bff; /* Цвет btn-primary */
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    color: #0062cc;
+    text-decoration: underline; /* Темный цвет btn-primary при наведении */
+}
+
 
 
 

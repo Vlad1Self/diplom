@@ -40,8 +40,9 @@
                     </x-form-item>
 
                     <div class="text-left mt-3">
-                        <a href="{{ route('password-email') }}">Забыли пароль?</a>
+                        <a href="{{ route('password-email') }}" class="forgot-password-link">Забыли пароль?</a>
                     </div>
+
 
 
                     <button type="submit" class="btn btn-primary btn-block">Вход</button>

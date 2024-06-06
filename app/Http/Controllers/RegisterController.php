@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Post;
 use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
@@ -31,6 +32,8 @@ class RegisterController extends Controller
       $user -> email = $validated['email'];
       $user -> password = bcrypt($validated['password']);
       $user -> save();
+
+        Auth::login($user);
 
         return redirect()->route('shop');
     }

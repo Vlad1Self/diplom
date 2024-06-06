@@ -8,12 +8,6 @@
 
     <x-title>
         {{__('Создать товар')}}
-
-        <x-slot name="link">
-            <a href="{{route('shop')}}">
-                {{__('Назад')}}
-            </a>
-        </x-slot>
     </x-title>
 
     <x-form {{$attributes}} action="{{route('user.posts.store')}}" method="POST" enctype="multipart/form-data">
@@ -41,8 +35,7 @@
 
         <x-form-item>
             <x-label required>{{__('Описание товара')}}</x-label>
-
-            <x-trix name="content" value="{{$post->content ?? ''}}"/>
+            <textarea name="content" class="form-control" rows="3">{{ old('content', $post->content ?? '') }}</textarea>
             <x-error name="content"/>
         </x-form-item>
 

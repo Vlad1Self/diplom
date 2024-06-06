@@ -50,7 +50,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif'],
+            'image' => ['required', 'file', 'mimes:jpeg,jpg,png,gif,webp'],
             'price' => ['required', 'numeric'],
             'categories_id' => ['required', 'array', 'exists:categories,id'],
         ]);

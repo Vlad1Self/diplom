@@ -34,14 +34,18 @@ class PasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
+        $user = $notifiable; // Получаем объект пользователя
+        $username = $user->name; // Получаем имя пользователя
 
+        return (new MailMessage)
             ->subject('Изменить пароль')
-            ->greeting('Здравствуйте! ')
-            ->line('Вы отправили заявку на смену пароля. Пожалуйста, перейдите по ссылке ниже: ')
+            ->greeting("Здравствуйте, {$username}!") // Добавляем обращение по имени
+            ->line('Вы отправили заявку на смену пароля. Пожалуйста, перейдите по ссылке ниже: ')
             ->action('Изменить пароль', url('/password-change'))
             ->line('Если вы не отправляли заявку на смену пароля, проигнорируйте это письмо.');
     }
+
+
 
     /**
      * Get the array representation of the notification.

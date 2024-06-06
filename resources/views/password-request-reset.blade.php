@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container-fluid h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-4">
@@ -20,6 +21,9 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        <small class="form-text text-primary">
+                            <i class="fas fa-exclamation-triangle"></i> Новый пароль не должен совпадать с тем, который вы когда-то использовали.
+                        </small>
                     </div>
 
                     <div class="form-group mb-2">

@@ -149,7 +149,4 @@ class PasswordController extends Controller
         return redirect()->route('shop');
     }
 
-
-
-
 }

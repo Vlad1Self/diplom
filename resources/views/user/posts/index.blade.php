@@ -6,11 +6,6 @@
 
     <x-title>
         {{__('Мои товары')}}
-        <x-slot name="right">
-            <x-button-link href="{{route('user.posts.create')}}">
-                    {{__('Создать')}}
-            </x-button-link>
-        </x-slot>
     </x-title>
 
     @if(empty($posts))

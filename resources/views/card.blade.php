@@ -62,6 +62,7 @@
                {{-- <a href="{{ url('shop') }}" class="btn btn-primary"></i>Назад</a>--}}
 
                 <a href="{{ url('payment') }}" class="btn btn-primary"></i>Оформить заказ</a>
+
                 {{--<button class="btn btn-danger">Оплатить</button>--}}
             </td>
             <th style="width: 10%; height: 50px;"></th>

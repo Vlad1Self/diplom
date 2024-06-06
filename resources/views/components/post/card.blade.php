@@ -11,9 +11,10 @@
                 {!!$post->content!!}
             </p>
         </div>
-        <p>
-            <strong>{{ $post -> price }} ₽</strong>
-        </p>
+        <div class="d-flex justify-content-between align-items-center">
+            <strong class="h4">{{ $post -> price }} ₽</strong>
+        </div>
+        <p class="text-muted small">Цена за 1 кг</p>
         <p class="btn-holder"><a href="{{ route('addbook.to.cart', $post->id) }}" class="btn btn-primary">Добавить в корзину</a> </p>
     </x-card-body>
 </x-card>

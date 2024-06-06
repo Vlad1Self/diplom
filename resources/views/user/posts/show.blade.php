@@ -33,10 +33,10 @@
 
     </div>
 
-    <p>
-        {{ $post -> price }} руб.
-
-    </p>
+    <div class="d-flex justify-content-between align-items-center">
+        <strong class="h4">{{ $post -> price }} ₽</strong>
+    </div>
+    <p class="text-muted small">Цена за 1 кг</p>
     {!! $post->content !!}
 
 

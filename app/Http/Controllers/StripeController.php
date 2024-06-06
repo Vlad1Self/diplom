@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class StripeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('index');
@@ -17,6 +21,7 @@ class StripeController extends Controller
 
     public function checkout(Request $request)
     {
+
         // Получаем товары из корзины
         $cart = session()->get('cart', []);
 

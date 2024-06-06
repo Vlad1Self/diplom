@@ -28,6 +28,9 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        <small class="form-text text-primary">
+                            <i class="fas fa-exclamation-triangle"></i> Новый пароль не должен совпадать с тем, который вы когда-то использовали.
+                        </small>
                     </div>
 
                     <div class="form-group mb-2">
