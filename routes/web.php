@@ -23,11 +23,6 @@ use Illuminate\Support\Facades\Route;
 */
 require __DIR__ . '/user.php';
 
-Route::view('/', 'home.index')->name('home');
-
-Route::redirect('/home', '/')->name('home.redirect');
-
-
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'store'])->name('register.store');
